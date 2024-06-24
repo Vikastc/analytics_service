@@ -1,6 +1,1 @@
-# Issuer-agent
-Issuer Side of Wallet
-
-
-This project showcases the issuence of credential, creating schema and registries
-
+This project is a comprehensive analytics platform designed to record all metrics of a service.

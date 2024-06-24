@@ -1,9 +1,9 @@
-version: '3.8'
+version: "3.8"
 
 services:
     dhiagent:
-        image: dhiway/issuer-agent:latest
-        container_name: dhiagent
+        image: analytics:latest
+        container_name: analytics
         environment:
             - PORT=${AGENT_PORT}
             - TYPEORM_HOST=${STUDIO_TYPEORM_HOST}
@@ -19,11 +19,6 @@ services:
             - TYPEORM_MIGRATIONS_DIR=${STUDIO_TYPEORM_MIGRATIONS_DIR}
             - TYPEORM_SUBSCRIBERS_DIR=${STUDIO_TYPEORM_SUBSCRIBERS_DIR}
             - TYPEORM_LOGGING=${STUDIO_TYPEORM_LOGGING}
-            - CORD_WSS_URL=${CORD_WSS_URL}
-            - AUTHOR_URI=${AUTHOR_URI}
-            - MNEMONIC=${MNEMONIC}
-            - WALLET_URL=${WALLET_URL}
-            - AGENT_DID_NAME=${AGENT_DID_NAME}
         ports:
             - ${AGENT_PORT}:${AGENT_PORT}
         depends_on:

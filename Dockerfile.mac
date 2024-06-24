@@ -9,8 +9,6 @@ RUN yarn
 COPY . .
 RUN yarn build
 
-# Good to copy all templates to relevant directory
-RUN mkdir -p /tmp/templates
 
 EXPOSE 5001
 
