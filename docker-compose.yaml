@@ -36,7 +36,7 @@ services:
             - local
 
     postgres30:
-        image: postgres:14.5-alpine
+        image: timescale/timescaledb:2.9.1-pg12
         container_name: postgres30
         environment:
             POSTGRES_USER: ${STUDIO_TYPEORM_USERNAME}

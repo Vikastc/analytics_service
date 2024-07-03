@@ -1,40 +1,40 @@
-// import * as Cord from "@cord.network/sdk";
 import express from "express";
-import axios from "axios";
-import client from "./redisClient";
+import { getConnection } from "typeorm";
 
-export async function getOrSetCache(key: string, cb: any) {
-    const dataObj = await client.get(key);
+export async function manageEvent(req: express.Request, res: express.Response) {
+    try {
+        console.log("In manageEvent");
+        const data = req.body;
 
-    if (dataObj) {
-        console.log("used cache");
-        const parsedData = JSON.parse(dataObj);
-
-        return parsedData;
+        const savedData = await getConnection().manager.query(
+            data.query,
+            data.params
+        );
+        if (savedData) {
+            res.status(200).json({ result: "Event created" });
+            return true;
+        }
+    } catch (error) {
+        console.log("error: ", error);
+        res.status(500).json({ error: "Failed to create Event" });
+        return false;
     }
-
-    const freshData = await cb();
-
-    // Sets a key value pair as photos: "{}" with expiration of 5 seconds
-    await client.setEx(key, 5, JSON.stringify(freshData));
-    console.log("set cache");
-    return freshData;
 }
 
-export async function setAndGetFromRedis(
+export async function queryMetrics(
     req: express.Request,
     res: express.Response
 ) {
     try {
-        // Checks if there is a key "photos" in redis
-        const photos = await getOrSetCache("photos", async () => {
-            const response = await axios.get("https://picsum.photos/v2/list");
-            return response.data;
-        });
+        console.log("In queryMetrics");
+        const data = req.body;
 
-        return res.json(photos);
+        const savedData = await getConnection().manager.query(data.query);
+        if (savedData) {
+            return res.status(200).json(savedData);
+        }
     } catch (error) {
-        console.error("Error:", error);
-        res.status(500).send("Internal Server Error");
+        console.log("error: ", error);
+        return res.status(500).json({ error: "Failed to query metrics" });
     }
 }
