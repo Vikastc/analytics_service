@@ -11,7 +11,7 @@ docker compose up -d
 # . Login to postgres container
 
 ```bash
-docker exec -it postgres30 /bin/bash
+docker exec -it postgres40 /bin/bash
 psql -U postgres -d analytics
 ```
 

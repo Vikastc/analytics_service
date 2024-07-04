@@ -22,7 +22,7 @@ services:
         ports:
             - ${AGENT_PORT}:${AGENT_PORT}
         depends_on:
-            - postgres30
+            - postgres40
         networks:
             - local
         command: npm run prod
@@ -35,9 +35,9 @@ services:
     #     networks:
     #         - local
 
-    postgres30:
+    postgres40:
         image: timescale/timescaledb:2.9.1-pg12
-        container_name: postgres30
+        container_name: postgres40
         environment:
             POSTGRES_USER: ${STUDIO_TYPEORM_USERNAME}
             POSTGRES_PASSWORD: ${STUDIO_TYPEORM_PASSWORD}
@@ -47,13 +47,13 @@ services:
             - ${STUDIO_TYPEORM_PORT}:${TYPEORM_PORT}
         restart: always
         volumes:
-            - postgres-data30:/var/lib/postgresql/data
+            - postgres-data40:/var/lib/postgresql/data
         networks:
             - local
 
 volumes:
-    postgres-data30:
-        name: postgres-data30
+    postgres-data40:
+        name: postgres-data40
 
 networks:
     local:
