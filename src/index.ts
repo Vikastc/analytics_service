@@ -43,11 +43,11 @@ if (cluster.isMaster) {
     app.use("/docs", swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
     app.use("/api/v1/redis", redisRouter);
 
-    app.post("/api/v1/send-event", async (req, res) => {
+    app.post("/api/v1/analytics/send-event", async (req, res) => {
         return await manageEvent(req, res);
     });
 
-    app.post("/api/v1/query-metrics", async (req, res) => {
+    app.post("/api/v1/analytics/query-metrics", async (req, res) => {
         return await queryMetrics(req, res);
     });
 
