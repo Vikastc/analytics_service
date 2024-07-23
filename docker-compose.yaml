@@ -47,13 +47,13 @@ services:
             - ${STUDIO_TYPEORM_PORT}:${TYPEORM_PORT}
         restart: always
         volumes:
-            - /home/developer/backup-analytics:/var/lib/postgresql/data
+            - postgres-data40:/var/lib/postgresql/data
         networks:
             - local
 
-    #volumes:
-    #postgres-data40:
-    #name: postgres-data40
+volumes:
+    postgres-data40:
+        name: postgres-data40
 
 networks:
     local:
